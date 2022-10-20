@@ -119,54 +119,101 @@ const router = express.Router();
 //        }
 //     })
 
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ],
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ],
-       },
-   ]
+// let players =
+//    [
+//        {
+//            "name": "manish",
+//            "dob": "1/1/1995",
+//            "gender": "male",
+//            "city": "jalandhar",
+//            "sports": [
+//                "swimming"
+//            ]
+//        },
+//        {
+//            "name": "gopal",
+//            "dob": "1/09/1995",
+//            "gender": "male",
+//            "city": "delhi",
+//            "sports": [
+//                "soccer"
+//            ],
+//        },
+//        {
+//            "name": "lokesh",
+//            "dob": "1/1/1990",
+//            "gender": "male",
+//            "city": "mumbai",
+//            "sports": [
+//                "soccer"
+//            ],
+//        },
+//    ]
  
-   router.post('/players', function (req, res) {
+//    router.post('/players', function (req, res) {
  
-       //LOGIC WILL COME HERE
-       let newPlayer = req.body
-       let playerExists=players.find(x =>x.name===newPlayer.name)
-       if(playerExists){
-       res.send('Player name already exists')
-       }
-       else{
+//        //LOGIC WILL COME HERE
+//        let newPlayer = req.body
+//        let playerExists=players.find(x =>x.name===newPlayer.name)
+//        if(playerExists){
+//        res.send('Player name already exists')
+//        }
+//        else{
    
-           players.push(newPlayer)
+//            players.push(newPlayer)
     
-           res.send({newPlayers:players})
-       }
+//            res.send({newPlayers:players})
+//        }
            
-       });
+//        });
  
        
   
+// module.exports = router;
+
+let persons= [
+    {
+    name: "PK",
+    age: 10,
+    votingStatus: false
+ },
+ {
+    name: "SK",
+    age: 20,
+    votingStatus: false
+ },
+ {
+    name: "AA",
+    age: 70,
+    votingStatus: false
+ },
+ {
+    name: "SC", 
+    age: 5,
+    votingStatus: false
+ },
+ {
+    name: "HO",
+    age: 40,
+    votingStatus: false
+ }
+ ]
+ router.post('/person' , function(req,res){
+     const votingAge =req.query.votingAge
+ 
+     const updatedPersons = []
+     persons.forEach( (person)  =>{
+         if (person.age > votingAge){
+             person.votingStatus =true 
+             updatedPersons.push(person)
+         }
+     })
+     return res.send({updatedPersons: updatedPersons})
+ 
+ })
+ 
+
+
+
+
 module.exports = router;
