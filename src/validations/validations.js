@@ -30,4 +30,8 @@ const isValidString = (String) => {
     return regexName.test(String)
   }
 
-  module.exports={isValidObjectId,isValidPhone,isValidDate,isValidEmail,isValidString,isValidCustomerId}
+  let isValidCardNumber= function(value){
+    const regex=/(?:\d[ -]*?){13,16}/
+    return regex.test(value)
+  }
+  module.exports={isValidObjectId,isValidPhone,isValidDate,isValidEmail,isValidString,isValidCustomerId,isValidCardNumber}

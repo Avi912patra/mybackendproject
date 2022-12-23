@@ -1,7 +1,7 @@
 const cardModel= require("../models/cardmodel")
 const customerMoodel=require('../models/customermodel')
 
-const{isValidObjectId,isValidPhone,isValidDate,isValidEmail,isValidString,isValidCustomerId}= require("../validations/validations")
+const{isValidObjectId,isValidCardNumber,isValidPhone,isValidString}= require("../validations/validations")
 
 
 //====================================CREATE CARD================================================================//
@@ -13,9 +13,7 @@ const createCard= async function(req,res){
         if(Object.keys(data).length==0){
             return res.status(400).send({status:false,msg:"provide data to create"})
         }
-
-        let validCardNumber= /(?:\d[ -]*?){13,16}/
-        if(!validCardNumber.test(data.cardNumber)) return res.status(400).send({status:true,msg:"provide valid card number"})
+        if(!isValidCardNumber(data.cardNumber)) return res.status(400).send({status:true,msg:"provide valid card number"})
       
        if(!isValidString(data.cardType)) return res.status(400).send({status:false,msg:"provide valid cardtype"})
         if(!isValidString(data.customerName)) return res.status(400).send({status:false,msg:"provide valid customerName"})
@@ -35,7 +33,7 @@ const createCard= async function(req,res){
 }
 
 //=======================================GET CARD=================================================================//
-
+        
 const getCardDetails=async function(req,res){
     try{
        
